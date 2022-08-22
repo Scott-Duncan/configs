@@ -29,6 +29,6 @@ Plug 'tomasr/molokai'
 call plug#end()
 
 colorscheme molokai
-highlight Normal guibg=black
+highlight Normal guibg=NONE
 
 let mapleader = " "
