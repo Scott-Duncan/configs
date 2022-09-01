@@ -1,22 +1,35 @@
-function fish_greeting -d "Greeting message on shell session start up"
+function fish_greeting -d "Greeting Message on shell session startup"
 
-    echo ""
-    echo -en "        |         " (welcome_message) "\n"
-    echo -en "       / \        \n"
-    echo -en "      / _ \       " (show_date_info) "\n"
-    echo -en "     |.o '.|      \n"
-    echo -en "     |'._.'|      Space vessel computer:\n"
-    echo -en "     |     |      " (show_os_info) "\n"
-    echo -en "   ,'|  |  |`.    " (show_cpu_info) "\n"
-    echo -en "  /  |  |  |  \   " (show_mem_info) "\n"
-    echo -en "  |,-'--|--'-.|   " (show_net_info) "\n"
-    set_color yellow
-    echo -en "   | | | | | |\n"
+    set_color C0C0C0 # silver
+    echo -en "               .                  \n"
+    echo -en "              .:.                 \n"
+    echo -en "             .:::.                \n"
+    echo -en "            .:::::.               \n"; set_color FFD700;
+    echo -en "        ***"; set_color C0C0C0; echo -en ".:::::::."; set_color FFD700; echo -en " ***           "
+    echo -en (welcome_message) "\n" 
+    set_color FFD700
+    echo -en "   *******"; set_color C0C0C0; echo -en ".:::::::::."; set_color FFD700; echo -en "*******      \n";
+    echo -en " ********"; set_color C0C0C0; echo -en ".:::::::::::."; set_color FFD700; echo -en "********    " 
+    echo -en (show_date_info) "\n"
+    set_color FFD700
+    echo -en "********"; set_color C0C0C0; echo -en ".:::::::::::::."; set_color FFD700; echo -en "********   "
+    echo -en (show_cpu_info) "\n"
+    set_color FFD700
+    echo -en "*******"; set_color C0C0C0; echo -en ".::::::'"; set_color FFD700; echo -en "***"; set_color C0C0C0; echo -en "`::::."; set_color FFD700; echo -en "*******   " 
+    echo -en (show_mem_info) "\n"
+    set_color FFD700
+    echo -en "******"; set_color C0C0C0; echo -en ".::::'"; set_color FFD700; echo -en "*********"; set_color C0C0C0; echo -en "`::."; set_color FFD700; echo -en "******   " 
+    echo -ne (show_net_info) "\n"
+    set_color FFD700
+    echo -en " ****"; set_color C0C0C0; echo -en ".:::'"; set_color FFD700; echo -en "*************"; set_color C0C0C0; echo -en "`:."; set_color FFD700; echo -en "****    \n" 
+    echo -en "   *"; set_color C0C0C0; echo -en ".::'"; set_color FFD700; echo -en "*****************"; set_color C0C0C0; echo -en "`.";set_color FFD700; echo -en "*      \n"   
+    set_color C0C0C0
+    echo -en "   .:'  "; set_color FFD700; echo -en "***************"; set_color C0C0C0; echo -en "    .      \n"; 
+    echo -en "  .                               \n"
     set_color grey
     echo "Have a nice trip"
     set_color normal
 end
-
 
 function welcome_message -d "Say welcome to user"
 
