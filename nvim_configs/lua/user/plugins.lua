@@ -63,8 +63,22 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 
+  -- Telescop
+  use "nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
+  --
+  -- Tree Sittev
+   use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+  use "nvim-treesitter/playground" 
+
   -- Colour Schemes
   use "EdenEast/nightfox.nvim"
+  use "ellisonleao/gruvbox.nvim"
+  -- Neo Test 
+  -- use "nvim-neotest/neotest"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
