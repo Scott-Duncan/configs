@@ -76,6 +76,10 @@ return packer.startup(function(use)
   }
   use "nvim-treesitter/playground" 
 
+  -- Comments
+  use "numToStr/Comment.nvim" -- Easily comment stuff
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+
   -- Colour Schemes
   use "EdenEast/nightfox.nvim"
   use "ellisonleao/gruvbox.nvim"
