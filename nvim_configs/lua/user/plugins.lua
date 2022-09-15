@@ -66,6 +66,8 @@ return packer.startup(function(use)
   -- Telescop
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
+  use "chip/telescope-software-licenses.nvim"
+  require("telescope").load_extension("software-licenses")
   --
   -- Tree Sittev
    use {
@@ -77,6 +79,8 @@ return packer.startup(function(use)
   -- Colour Schemes
   use "EdenEast/nightfox.nvim"
   use "ellisonleao/gruvbox.nvim"
+  use "folke/tokyonight.nvim"
+
   -- Neo Test 
   -- use "nvim-neotest/neotest"
 
