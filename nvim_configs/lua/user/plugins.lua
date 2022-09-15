@@ -85,6 +85,9 @@ return packer.startup(function(use)
   use "ellisonleao/gruvbox.nvim"
   use "folke/tokyonight.nvim"
 
+  -- Git 
+  use "lewis6991/gitsigns.nvim"
+
   -- Neo Test 
   -- use "nvim-neotest/neotest"
 
