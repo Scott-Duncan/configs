@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 # program launcher
 super + @space
@@ -121,11 +121,14 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 #Volume Control
-XF86AudioLowerVolume
-	amixer set Master 5%-
+# amixer set Master 5%-
+# amixer set Master 5%+
 
-XF86AudioRaiseVolume
-	amixer set Master 5%+
+ctrl + minus 
+  set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink -5
+
+ctrl + plus 
+  set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink +5
 
 XF86AudioMute
-        amixer set Master toggle
+  amixer set Master {mute, unmute}

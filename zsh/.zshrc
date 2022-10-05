@@ -12,6 +12,8 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="awesomepanda" # set by `omz`
 setxkbmap -option caps:escape
 setxkbmap us 
+#~/Libraries/qfetch/target/release/qfetch
+neofetch
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -89,7 +91,7 @@ bindkey '^n' autosuggest-accept
 bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
-bindkey '^m' accept-line
+bindkey '^ ' accept-line
 
 # -- Sources
 source /opt/ros/melodic/setup.zsh
@@ -112,6 +114,7 @@ export CMAKE_PREFIX_PATH=/home/scott/Libraries/vision/install:$CMAKE_PREFIX_PATH
 export CMAKE_PREFIX_PATH=/home/scott/Libraries/FunctionalPlus/install:$CMAKE_PREFIX_PATH
 export CMAKE_PREFIX_PATH=/home/scott/Libraries/frugally-deep/install:$CMAKE_PREFIX_PATH
 export CMAKE_PREFIX_PATH=/home/scott/Libraries/rtabmap/install:$CMAKE_PREFIX_PATH
+export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PATH
 
 # User configuration
 

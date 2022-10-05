@@ -2,16 +2,17 @@
 
 sxhkd &
 
-xrandr --output DP-0 --primary --mode 1920x1080 --rotate normal --output HDMI-0 --mode 1920x1080 --rotate normal --left-of DP-0 --output eDP-1-1 --mode 1920x1080 --rotate normal --right-of DP-0
+#if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
+xrandr --output DP-1-0 --primary --mode 1920x1080 --rotate normal --output HDMI-1-0 --mode 1920x1080 --rotate normal --left-of DP-1-0 --output eDP-1 --mode 1920x1080 --rotate normal --right-of DP-1-0
 
-bspc monitor DP-0 -d 1 2 3  
-bspc monitor HDMI-0 -d 4 5 6 
-bspc monitor eDP-1-1 -d 7 8 9 
+bspc monitor DP-1-0 -d 1 2 3  
+bspc monitor HDMI-1-0 -d 4 5 6 
+bspc monitor eDP-1 -d 7 8 9 
 
-bspc config border_width         4
-bspc config window_gap          30
+bspc config border_width         2
+bspc config window_gap          10
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
@@ -25,5 +26,6 @@ if [[ $(cat /sys/module/hid_apple/parameters/fnmode | grep 1) ]]; then
   echo 0 >> /sys/module/hid_apple/parameters/fnmode
 fi 
 
-feh --bg-fill Pictures/backgrounds/used/gut-grey.jpg
-tint2
+picom -b
+feh --bg-fill ~/Pictures/にほんごのたいふう.png
+~/.config/polybar/launch.sh
