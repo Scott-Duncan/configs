@@ -48,6 +48,10 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
   use "akinsho/toggleterm.nvim"
+  use {
+    'romgrk/barbar.nvim',
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -67,13 +71,13 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
-  -- Telescop
+  -- Telescope
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
   use "chip/telescope-software-licenses.nvim"
   require("telescope").load_extension("software-licenses")
   --
-  -- Tree Sittev
+  -- Tree Sitter
    use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",

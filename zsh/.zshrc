@@ -13,7 +13,18 @@ ZSH_THEME="awesomepanda" # set by `omz`
 setxkbmap -option caps:escape
 setxkbmap us 
 #~/Libraries/qfetch/target/release/qfetch
-neofetch
+# neofetch
+
+# save path on cd
+function cd {
+    builtin cd $@
+    pwd > ~/.last_dir
+}
+
+# restore last saved path
+if [ -f ~/.last_dir ]
+    then cd `cat ~/.last_dir`
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,6 +92,7 @@ plugins=(
   z
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zaw
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -93,9 +105,12 @@ bindkey '^j' down-line-or-search
 
 bindkey '^ ' accept-line
 
+bindkey '^r' zaw-history
+bindkey '^b' zaw-git-branches
+
 # -- Sources
 source /opt/ros/melodic/setup.zsh
-source /home/scott/Documents/catkin_ws/devel/setup.zsh
+source /home/scott/catkin_ws/devel/setup.zsh
 
 # -- Exports for cmake and CUDA 
 
@@ -118,6 +133,7 @@ export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PA
 
 # User configuration
 
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -132,6 +148,9 @@ export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PA
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+check_temp () {
+ paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/' | grep x86_pkg_temp
+}
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -141,6 +160,6 @@ export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PA
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ws="cd ~/Documents/catkin_ws/"
+alias ws="cd ~/catkin_ws/"
 alias vd="pactl set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink -5%"
 alias vu="pactl set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink +5%"
