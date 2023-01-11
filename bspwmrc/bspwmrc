@@ -2,12 +2,9 @@
 
 sxhkd &
 
-if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
-  xrandr --output HDMI-0 --primary --mode 1920x1080 --rotate normal --output DVI-D-0 --mode 1920x1080 --rotate normal --right-of HDMI-0
-fi
+xrandr --output eDP --primary --mode 2560x1440 --rotate normal
 
-bspc monitor HDMI-0 -d 1 2 3 4 5 
-bspc monitor DVI-D-0 -d 6 7 8 9 10 
+bspc monitor eDP -d 1 2 3 4 5 6 7 8 9 
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -22,5 +19,6 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
-xwallpaper --zoom ~/Downloads/754912.png
-tint2
+picom -b &
+feh --bg-fill ~/Pictures/wallpaperflare.com_wallpaper.jpg
+~/.config/polybar/single_launch.sh &
