@@ -20,5 +20,5 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
 picom -b &
-feh --bg-fill ~/Pictures/wallpaperflare.com_wallpaper.jpg
+feh --bg-fill ~/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg
 ~/.config/polybar/single_launch.sh &

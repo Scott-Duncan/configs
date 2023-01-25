@@ -109,45 +109,46 @@ bindkey '^r' zaw-history
 bindkey '^b' zaw-git-branches
 
 # -- Sources
-source /opt/ros/melodic/setup.zsh
-source /home/scott/catkin_ws/devel/setup.zsh
+source /opt/ros/galactic/setup.zsh
+source /home/scott/ros2_ws/install/setup.zsh 
 
 # -- Exports for cmake and CUDA 
-
-export EDITOR=/usr/local/bin/nvim 
-export PATH=/home/scott/Libraries/CMake/install/bin:$PATH
-export PATH=/home/scott/Libraries/diff-so-fancy:$PATH
-export PATH=/usr/local/cuda-11.4/bin:$PATH
-export PATH=$PATH:/home/scott/.spicetify
-export CMAKE_PREFIX_PATH=/usr/local/lib/cmake/:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/CMake/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/json/install/:$CMAKE_PREFIX_PATH 
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/opencv/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/magma-2.5.4/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/pytorch/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/vision/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/FunctionalPlus/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/frugally-deep/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/rtabmap/install:$CMAKE_PREFIX_PATH
-export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PATH
+#
+# export EDITOR=/usr/local/bin/nvim 
+# export PATH=/home/scott/Libraries/CMake/install/bin:$PATH
+# export PATH=/home/scott/Libraries/diff-so-fancy:$PATH
+# export PATH=/usr/local/cuda-11.4/bin:$PATH
+# export PATH=$PATH:/home/scott/.spicetify
+# export CMAKE_PREFIX_PATH=/usr/local/lib/cmake/:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/CMake/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/json/install/:$CMAKE_PREFIX_PATH 
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/opencv/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/magma-2.5.4/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/pytorch/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/vision/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/FunctionalPlus/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/frugally-deep/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/rtabmap/install:$CMAKE_PREFIX_PATH
+# export CMAKE_PREFIX_PATH=/home/scott/Libraries/yaml-cpp/install:$CMAKE_PREFIX_PATH
 
 # User configuration
+#
+export EDITOR= nvim
+export VISUAL= nvim
 
+#autocomplete for ros2 and colcon
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+alias ws="cd ~/ros2_ws
+source /home/scott/ros2_ws/install/setup.zsh 
+autoload -U bashcompinit
+bashcompinit
+eval '$(register-python-argcomplete3 ros2)'
+eval '$(register-python-argcomplete3 colcon)'
+"
 check_temp () {
  paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/' | grep x86_pkg_temp
 }
@@ -160,6 +161,3 @@ check_temp () {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ws="cd ~/catkin_ws/"
-alias vd="pactl set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink -5%"
-alias vu="pactl set-sink-volume bluez_sink.E4_41_22_4A_27_5D.a2dp_sink +5%"
