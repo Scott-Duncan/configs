@@ -9,7 +9,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="awesomepanda" # set by `omz`
+# ZSH_THEME="agnoster" # set by `omz`
+ZSH_THEME="agnoster" # set by `omz`
 setxkbmap -option caps:escape
 setxkbmap us 
 #~/Libraries/qfetch/target/release/qfetch
@@ -25,6 +26,17 @@ function cd {
 if [ -f ~/.last_dir ]
     then cd `cat ~/.last_dir`
 fi
+
+# source ros 
+
+function src_ros {
+  source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh
+  source /opt/ros/galactic/setup.zsh
+  source /usr/share/colcon_cd/function/colcon_cd.sh
+  export _colcon_cd_root=/opt/ros/galactic/ 
+  source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+  source /home/scott/ros2_ws/install/local_setup.zsh 
+}
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -90,6 +102,7 @@ plugins=(
   sudo
   git
   z
+  colors
   zsh-autosuggestions
   zsh-syntax-highlighting
   zaw
@@ -109,8 +122,8 @@ bindkey '^r' zaw-history
 bindkey '^b' zaw-git-branches
 
 # -- Sources
-source /opt/ros/galactic/setup.zsh
-source /home/scott/ros2_ws/install/setup.zsh 
+src_ros
+export ROS_DOMAIN_ID=4
 
 # -- Exports for cmake and CUDA 
 #
@@ -133,8 +146,8 @@ source /home/scott/ros2_ws/install/setup.zsh
 
 # User configuration
 #
-export EDITOR= nvim
-export VISUAL= nvim
+export EDITOR=/usr/local/bin/nvim 
+export VISUAL=/usr/local/bin/nvim 
 
 #autocomplete for ros2 and colcon
 autoload -U bashcompinit
@@ -142,13 +155,23 @@ bashcompinit
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
-alias ws="cd ~/ros2_ws
-source /home/scott/ros2_ws/install/setup.zsh 
-autoload -U bashcompinit
-bashcompinit
-eval '$(register-python-argcomplete3 ros2)'
-eval '$(register-python-argcomplete3 colcon)'
+alias rf="exec zsh"
+alias ws="cd ~/ros2_ws"
+alias ews="nvim ~/ros2_ws/src/kisui_driver/kisui_core"
+alias sshkitty=" kitty +kitten ssh"
+alias colcon_ws="
+ws ;
+source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh;
+colcon build --continue-on-error --symlink-install;
+source /home/scott/ros2_ws/install/local_setup.zsh ;
 "
+
+alias colcon_clean="
+ws ; 
+rm -rf build install log;
+source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh;
+"
+
 check_temp () {
  paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/' | grep x86_pkg_temp
 }
