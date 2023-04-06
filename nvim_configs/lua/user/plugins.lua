@@ -89,8 +89,8 @@ return packer.startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- Colour Schemes
-  use "EdenEast/nightfox.nvim"
-  use "ellisonleao/gruvbox.nvim"
+  --[[ use "EdenEast/nightfox.nvim" ]]
+  --[[ use "ellisonleao/gruvbox.nvim" ]]
   use "folke/tokyonight.nvim"
 
   -- Git 
