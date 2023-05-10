@@ -78,7 +78,7 @@ return packer.startup(function(use)
   require("telescope").load_extension("software-licenses")
   --
   -- Tree Sitter
-   use {
+  use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
