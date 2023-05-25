@@ -4,14 +4,14 @@ sxhkd &
 
 xrandr --output eDP --primary --mode 2560x1440 --rotate normal
 
-bspc monitor eDP -d 1 2 3 4 5 6 7 8 9 
+bspc monitor eDP -d 1 2 3 4 5 6 7 8 9
 
-bspc config border_width         2
-bspc config window_gap          12
+bspc config border_width 2
+bspc config window_gap 12
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
@@ -21,4 +21,4 @@ bspc rule -a Screenkey manage=off
 
 picom -b &
 feh --bg-fill ~/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg
-~/.config/polybar/single_launch.sh &
+~/.config/polybar/single_laptop_launch.sh &
