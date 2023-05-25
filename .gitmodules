@@ -1,0 +1,3 @@
+[submodule "scottvim"]
+	path = scottvim
+	url = https://github.com/Scott-Duncan/scottvim.git
