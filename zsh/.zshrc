@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="agnoster" # set by `omz`
-ZSH_THEME="agnoster" # set by `omz`
+ZSH_THEME="pi" # set by `omz`
 setxkbmap -option caps:escape
 setxkbmap us 
 #~/Libraries/qfetch/target/release/qfetch
@@ -130,9 +130,8 @@ export ROS_DOMAIN_ID=4
 # export EDITOR=/usr/local/bin/nvim 
 # export PATH=/home/scott/Libraries/CMake/install/bin:$PATH
 # export PATH=/home/scott/Libraries/diff-so-fancy:$PATH
-# export PATH=/usr/local/cuda-11.4/bin:$PATH
-# export PATH=$PATH:/home/scott/.spicetify
-# export CMAKE_PREFIX_PATH=/usr/local/lib/cmake/:$CMAKE_PREFIX_PATH
+export PATH=/usr/local/cuda-11.7/bin:$PATH
+export CMAKE_PREFIX_PATH=/usr/local/lib/cmake/:$CMAKE_PREFIX_PATH
 # export CMAKE_PREFIX_PATH=/home/scott/Libraries/CMake/install:$CMAKE_PREFIX_PATH
 # export CMAKE_PREFIX_PATH=/home/scott/Libraries/json/install/:$CMAKE_PREFIX_PATH 
 # export CMAKE_PREFIX_PATH=/home/scott/Libraries/opencv/install:$CMAKE_PREFIX_PATH
@@ -148,6 +147,8 @@ export ROS_DOMAIN_ID=4
 #
 export EDITOR=/usr/local/bin/nvim 
 export VISUAL=/usr/local/bin/nvim 
+export PATH=$PATH:/home/scott/.spicetify
+export spotify_path=snap/spotify/64/usr/share/spotify/
 
 #autocomplete for ros2 and colcon
 autoload -U bashcompinit
@@ -162,7 +163,7 @@ alias sshkitty=" kitty +kitten ssh"
 alias colcon_ws="
 ws ;
 source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh;
-colcon build --continue-on-error --symlink-install;
+colcon build --continue-on-error --symlink-install  --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1;
 source /home/scott/ros2_ws/install/local_setup.zsh ;
 "
 
@@ -184,3 +185,4 @@ check_temp () {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
