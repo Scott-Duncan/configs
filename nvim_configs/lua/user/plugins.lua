@@ -46,7 +46,7 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "rstacruz/vim-closer" -- Closes tabs in vim only after enter is pressed 
   use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
+  use 'nvim-tree/nvim-tree.lua'
   use "akinsho/toggleterm.nvim"
   use {
     'romgrk/barbar.nvim',
