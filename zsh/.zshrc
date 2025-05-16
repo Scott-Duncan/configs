@@ -10,11 +10,12 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="agnoster" # set by `omz`
-ZSH_THEME="pi" # set by `omz`
+# ZSH_THEME="pi" # set by `omz`
+ZSH_THEME="agnoster" # set by `omz`
 setxkbmap -option caps:escape
 setxkbmap us 
 #~/Libraries/qfetch/target/release/qfetch
-# neofetch
+#neofetch
 
 # save path on cd
 function cd {
@@ -29,14 +30,31 @@ fi
 
 # source ros 
 
-function src_ros {
-  source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh
+function src_ros2 {
   source /opt/ros/galactic/setup.zsh
   source /usr/share/colcon_cd/function/colcon_cd.sh
   export _colcon_cd_root=/opt/ros/galactic/ 
   source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+  source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh
   source /home/scott/ros2_ws/install/local_setup.zsh 
 }
+
+function src_ros {
+  source /opt/ros/noetic/setup.zsh
+  source /home/scott/Documents/ros_ws/telexistence_project/devel/setup.zsh
+}
+#
+# chpwd() {
+#   if [[ $PWD = /home/scott/ros2_ws ]]
+#   then
+#     src_ros2
+#   fi
+#   if [[ $PWD = /home/scott/Documents/ros_ws ]]
+#   then
+#     src_ros
+#   fi
+# }
+#
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -122,8 +140,7 @@ bindkey '^r' zaw-history
 bindkey '^b' zaw-git-branches
 
 # -- Sources
-src_ros
-export ROS_DOMAIN_ID=4
+src_ros2
 
 # -- Exports for cmake and CUDA 
 #
@@ -149,6 +166,9 @@ export EDITOR=/usr/local/bin/nvim
 export VISUAL=/usr/local/bin/nvim 
 export PATH=$PATH:/home/scott/.spicetify
 export spotify_path=snap/spotify/64/usr/share/spotify/
+export ROS_DOMAIN_ID=14
+export ROS_LOCALHOST_ONLY=0
+# export VERSION=9.0
 
 #autocomplete for ros2 and colcon
 autoload -U bashcompinit
@@ -156,22 +176,26 @@ bashcompinit
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
+#aliases
+#
 alias rf="exec zsh"
 alias ws="cd ~/ros2_ws"
 alias ews="nvim ~/ros2_ws/src/kisui_driver/kisui_core"
+alias esm="nvim ~/ros2_ws/src/kisui_driver/kisui_state_machine"
 alias sshkitty=" kitty +kitten ssh"
-alias colcon_ws="
-ws ;
-source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh;
-colcon build --continue-on-error --symlink-install  --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1;
-source /home/scott/ros2_ws/install/local_setup.zsh ;
-"
-
-alias colcon_clean="
-ws ; 
-rm -rf build install log;
-source /home/scott/Libraries/ros2_external_libraries/install/local_setup.zsh;
-"
+alias colcon_ws=" ws ; src_ros2; source ${HOME}/Libraries/ros2_external_libraries/install/local_setup.zsh;
+colcon build --continue-on-error --symlink-install  --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DNO_STEERING=0;
+source ${HOME}/ros2_ws/install/local_setup.zsh ; cd -; "
+alias colcon_ws_no_steering=" ws ; src_ros2; source ${HOME}/Libraries/ros2_external_libraries/install/local_setup.zsh;
+colcon build --continue-on-error --symlink-install  --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DNO_STEERING=1;
+source ${HOME}/ros2_ws/install/local_setup.zsh ; cd -; "
+alias canbus_up="sudo slcand -o -c -s0 /dev/ttyACM0 can0; 
+sudo ifconfig can0 up; sudo ifconfig can0 txqueuelen 1000;"
+alias colcon_clean=" ws ; rm -rf build install log;
+source ${HOME}/Libraries/ros2_external_libraries/install/local_setup.zsh; cd -;"
+alias earphone_connect="bluetoothctl connect 18:45:B3:3B:05:EE"
+alias connect_pink_controller="bluetoothctl connect 7C:66:EF:47:86:9B"
+alias connect_purple_controller="bluetoothctl connect 48:18:8D:AA:CF:86"
 
 check_temp () {
  paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/' | grep x86_pkg_temp
