@@ -1,9 +1,9 @@
 #! /bin/sh
 
-SCREEN_NUMBER=3
-laptop_mon="DP-4"
-left_screen="HDMI-0"
-right_screen="DP-0"
+SCREEN_NUMBER=2
+laptop_mon="eDP-1"
+left_screen="DP-2"
+right_screen="DP-2"
 
 echo "screen number is $SCREEN_NUMBER"
 
@@ -17,7 +17,9 @@ bspc config borderless_monocle true
 bspc config gapless_monocle true
 
 # bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^1'
+bspc rule -a Chromium desktop='^1' follow=off
+bspc rule -a Slack desktop='^10' follow=off
+bspc rule -a Obsidian v1.11.5 desktop='^9' follow=off
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
@@ -30,8 +32,18 @@ if [ $SCREEN_NUMBER -eq 3 ]; then
 fi
 
 if [ $SCREEN_NUMBER -eq 1 ]; then
-  xrandr --output $laptop_mon --primary --mode 2560x1440 --rotate normal
+  xrandr --output $laptop_mon --primary --mode 1920x1200 --rotate normal
   bspc monitor $laptop_mon -d 1 2 3 4 5 6 7 8 9 10
+  picom -b &
+  ~/.config/polybar/single_launch.sh &
+fi
+
+if [ $SCREEN_NUMBER -eq 2 ]; then
+  xrandr --output $left_screen --primary --mode 1920x1080 --rotate normal --output $laptop_mon --rotate normal --mode 1920x1200 --right-of $left_screen
+  bspc monitor $left_screen -d 1 2 3 4 5
+  bspc monitor $laptop_mon -d 6 7 8 9 10
+  picom -b &
+  ~/.config/polybar/launch.sh &
 fi
 
 # if xrandr -q | grep 'HDMI-0 connected' >/dev/null 2>&1; then
@@ -43,7 +55,5 @@ fi
 #   feh --bg-fill ~/Pictures/wow.jpg
 #   ~/.config/polybar/single_launch.sh &
 
-picom -b &
 # feh --bg-fill ~/Pictures/onyxia.png
 bash /home/scott/.config/bspwm/background_picker.bash
-~/.config/polybar/single_launch.sh &
