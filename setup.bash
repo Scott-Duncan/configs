@@ -4,11 +4,27 @@
 sudo apt install git wget curl
 mkdir ~/Libraries
 
+#zsh
+sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zpm-zsh/colors ~/.oh-my-zsh/custom/plugins/colors
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 ##Install basic nerdfonts
 mkdir ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip
 unzip Hack.zip -d ~/.local/share/fonts/
 fc-cache ~/.local/share/fonts
+
+# BSPWM
+sudo apt install bspwm
+mkdir .config/bspwmrc
+ln -s /home/scott/Documents/configs/bspwmrc/bspwmrcwork /home/scott/.config/bspwmrc/bspwmrc
+ln -s /home/scott/Documents/configs/bspwmrc/background_picker.bash /home/scott/.config/bspwmrc/
+
+# Nvim
+ln -s /home/scott/Documents/configs/lazy_scottvim/ /home/scott/.config/nvim
 
 ## Install polybar
 # dependencies
@@ -25,13 +41,13 @@ sudo make install
 
 ## Install polybar
 # dependencies
-sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
-cd ..
-git clone https://github.com/yshui/picom.git
-cd picom
-git submodule update --init --recursive
-meson setup --buildtype=release . build
-ninja -C build
-ninja -C build install
+# sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+# cd ..
+# git clone https://github.com/yshui/picom.git
+# cd picom
+# git submodule update --init --recursive
+# meson setup --buildtype=release . build
+# ninja -C build
+# ninja -C build install
 
 # arduino-mcp2515  BehaviorTree.CPP  depthai-core  depthai-viewer  diff-so-fancy  frugally-deep  FunctionalPlus  Groot  json  kisui_ai_bridge  kisui_extras  obs-studio  picom  pipewire  polybar  ros2_external_libraries  slock  tensorflow
