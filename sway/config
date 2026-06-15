@@ -1,0 +1,160 @@
+### Variables ################################################################
+set $mod Mod4
+set $alt Mod1
+set $term kitty
+set $menu dmenu_run          # launcher; replaces dmenu_run (X11-only)
+
+# Directional keys, vim-style (matches your bspwm h/j/k/l = W/S/N/E)
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+# Wallpaper is built in — no feh, no swaybg process needed:
+output * bg ~/Pictures/Backgrounds/moon_venus.jpg fill
+
+# Run `swaymsg -t get_outputs` to see your real monitor names 
+output DP-2  resolution 1920x1080 position 0,0
+output eDP-1 resolution 1920x1200 position 1920,0
+
+workspace 1 output DP-2
+workspace 2 output DP-2
+workspace 3 output DP-2
+workspace 4 output DP-2
+workspace 5 output DP-2
+workspace 6 output eDP-1
+workspace 7 output eDP-1
+workspace 8 output eDP-1
+workspace 9 output eDP-1
+workspace 10 output eDP-1
+
+### Appearance ###############################################################
+default_border pixel 2
+gaps inner 10
+gaps outer 0
+smart_borders on
+smart_gaps on
+font pango:monospace 10
+
+# Optional border colors (class.focused needs all five fields). Delete if happy
+# with defaults.            border   bg       text     indicator child_border
+client.focused              #88c0d0  #2e3440  #eceff4  #88c0d0   #88c0d0
+client.unfocused            #4c566a  #2e3440  #d8dee9  #4c566a   #4c566a
+
+# Hold Super and drag to move floating windows / right-drag to resize:
+floating_modifier $mod normal
+
+### Programs #################################################################
+bindsym $mod+Return exec $term            # super+Return -> terminal
+bindsym $mod+space  exec $menu            # super+space  -> launcher
+bindsym $mod+Escape reload                # super+Escape -> reload config (was: reload sxhkd)
+
+### Session ##################################################################
+bindsym $mod+$alt+q exit                  # super+alt+q  -> quit sway (was bspc quit)
+bindsym $mod+$alt+r reload                # super+alt+r  -> reload config (sway re-reads in place; no full restart needed)
+bindsym $mod+w        kill                # super+w       -> close window
+bindsym $mod+Shift+w  kill                # super+shift+w -> close (sway has no separate "kill")
+
+### Window state #############################################################
+bindsym $mod+f       fullscreen toggle              # super+f       -> fullscreen
+bindsym $mod+s       floating toggle                # super+s       -> floating
+bindsym $mod+t       floating disable               # super+t       -> back to tiled
+bindsym $mod+m       layout toggle split tabbed     # super+m       -> tabbed view (closest to monocle: one window at a time, cycle with focus)
+bindsym $mod+Ctrl+y  sticky toggle                  # super+ctrl+y  -> sticky (was the bspwm "sticky" node flag; floating windows only)
+
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+p        focus parent          # super+p       -> select parent container
+bindsym $mod+Shift+p  focus child           # super+shift+p -> descend into child
+
+bindsym $mod+Ctrl+v  split vertical         # next window opens below
+bindsym $mod+Ctrl+h  split horizontal       # next window opens to the right
+
+
+bindsym $mod+$alt+$left  resize shrink width  5 px or 5 ppt
+bindsym $mod+$alt+$right resize grow   width  5 px or 5 ppt
+bindsym $mod+$alt+$down  resize grow   height 5 px or 5 ppt
+bindsym $mod+$alt+$up    resize shrink height 5 px or 5 ppt
+
+mode "resize" {
+    bindsym $mod+$left  resize shrink width  5 px or 5 ppt
+    bindsym $mod+$right resize grow   width  5 px or 5 ppt
+    bindsym $mod+$down  resize grow   height 5 px or 5 ppt
+    bindsym $mod+$up    resize shrink height 5 px or 5 ppt
+    bindsym Left   resize shrink width  5 px or 5 ppt
+    bindsym Right  resize grow   width  5 px or 5 ppt
+    bindsym Down   resize grow   height 5 px or 5 ppt
+    bindsym Up     resize shrink height 5 px or 5 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bindsym $mod+Left  move left  20px
+bindsym $mod+Down  move down  20px
+bindsym $mod+Up    move up    20px
+bindsym $mod+Right move right 20px
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+# Cycle / jump-back (was super+bracket{left,right} and super+Tab):
+bindsym $mod+bracketleft  workspace prev
+bindsym $mod+bracketright workspace next
+bindsym $mod+Tab          workspace back_and_forth
+
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym --locked XF86AudioMute        exec wpctl set-mute   @DEFAULT_AUDIO_SINK@ toggle
+bindsym Ctrl+minus exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym Ctrl+equal exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+
+#Assing windows to set workspaces on open
+assign [app_id="chromium"] → "1"
+assign [class="obsidian"] → "9"
+assign [app_id="slack"] → "10"
+
+#Set chromium notifications as floating
+for_window [app_id="google-chrome" title="^Notification"] floating enable
+
+#===== Waybar handled in Kanshi ======
+exec kanshi &
+
+#===== Stop mouse following current window =====
+mouse_warping none
+
+#Allows running X11 applications in wayland - i.e. rviz2
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
+
+#Startup Applications
+exec chromium &
+exec slack &
+exec Obsidian &
+
+# Load distro drop-ins (gsettings/portals etc.) — keep this last:
+include /etc/sway/config.d/*
