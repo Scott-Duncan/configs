@@ -1,0 +1,97 @@
+[{
+// ===== External Monitor =====
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "output": "DP-2",
+  "height": 30, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 4, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["sway/window"],
+  "modules-right": ["network","battery","clock"],
+  // Modules configuration
+  "sway/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": false,
+      "persistent-workspaces": {
+          "*": 5 // Shows 5 persistent workspaces on every monitor
+      },
+      "format": "{icon}",
+      "format-icons": {
+          "1": "",
+          "2": "",
+          "urgent": "",
+      }
+  },
+  "battery": {
+      "states": {
+          "full": 100,
+          "good": 80,
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% {icon} ",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      // "format-good": "", // An empty format will hide the module
+      // "format-full": "",
+      "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected ⚠",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "clock": {
+      "format": "{:%H:%M} 🕐",
+      "tooltip": false
+  },
+},
+{
+// ===== Laptop Monitor =====
+  "layer": "top", // Waybar at top layer
+  "output": "eDP-1",
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 30, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 4, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["sway/window"],
+  "modules-right": ["cpu","temperature","memory","disk"],
+  // Modules configuration
+  "sway/workspaces": {
+      "disable-scroll": true,
+      "all-outputs": false,
+      "persistent-workspaces": {
+          "*": 5 // Shows 5 persistent workspaces on every monitor
+      },
+      "format": "{icon}",
+      "format-icons": {
+          "8": "",
+          "9": "✍️",
+          "10": "",
+      }
+  },
+  "cpu": {
+      "format": "{usage}% ",
+      "tooltip": false
+  },
+  "memory": {
+      "format": "{}% "
+  },
+  "disk": {
+      "format": "{}% 📦"
+  },
+  "temperature": {
+      "thermal-zone": 2,
+      "critical-threshold": 80,
+      "format": "{temperatureC}°C {icon}",
+      "format-icons": ["", "", ""]
+  },
+}]
