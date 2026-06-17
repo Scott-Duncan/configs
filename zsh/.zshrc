@@ -132,6 +132,7 @@ plugins=(
   zsh-syntax-highlighting
   zaw
   docker 
+  ros2
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -150,23 +151,11 @@ bindkey '^b' zaw-git-branches
 # -- Sources
 src_ros2
 
-# Docker exec a running docker container name 
-function dex() {
-  docker exec -it "$1" /bin/bash
-}
-# Autocomplete for dex
-function _dex() {
-  local containers
-  containers=($(docker ps --format '{{.Names}}'))
-  _describe 'containers' containers
-}
-
-compdef _dex dex
-
 # -- Exports for cmake and CUDA 
 #
 # export EDITOR=/usr/local/bin/nvim 
 # export PATH=/home/scott/Libraries/CMake/install/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 export PATH=/home/scott/Libraries/diff-so-fancy:$PATH
 export PATH=/usr/local/cuda-11.7/bin:$PATH
 export CMAKE_PREFIX_PATH=/usr/local/lib/cmake/:$CMAKE_PREFIX_PATH
@@ -232,3 +221,8 @@ alias mouse_connect="bluetoothctl connect 2A:07:98:D3:17:78"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+
+# Source zsh aliases
+if [ -f ~/.zsh_aliases ]; then
+    source ~/.zsh_aliases
+fi

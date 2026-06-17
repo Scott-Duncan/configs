@@ -15,7 +15,7 @@ output * bg ~/Pictures/Backgrounds/moon_venus.jpg fill
 
 # Run `swaymsg -t get_outputs` to see your real monitor names 
 output DP-2  resolution 1920x1080 position 0,0
-output eDP-1 resolution 1920x1200 position 1920,0
+output eDP-1 resolution 1920x1200 position 1920,600
 
 workspace 1 output DP-2
 workspace 2 output DP-2
@@ -29,38 +29,38 @@ workspace 9 output eDP-1
 workspace 10 output eDP-1
 
 ### Appearance ###############################################################
-default_border pixel 2
-gaps inner 10
-gaps outer 0
+default_border pixel 3
+gaps inner 5
+gaps outer 5
 smart_borders on
 smart_gaps on
 font pango:monospace 10
 
 # Optional border colors (class.focused needs all five fields). Delete if happy
 # with defaults.            border   bg       text     indicator child_border
-client.focused              #88c0d0  #2e3440  #eceff4  #88c0d0   #88c0d0
+client.focused              #C21A09  #C21A09  #eceff4  #88c0d0   #C21A09
 client.unfocused            #4c566a  #2e3440  #d8dee9  #4c566a   #4c566a
 
 # Hold Super and drag to move floating windows / right-drag to resize:
 floating_modifier $mod normal
 
 ### Programs #################################################################
-bindsym $mod+Return exec $term            # super+Return -> terminal
-bindsym $mod+space  exec $menu            # super+space  -> launcher
-bindsym $mod+Escape reload                # super+Escape -> reload config (was: reload sxhkd)
+bindsym $mod+Return exec $term
+bindsym $mod+space  exec $menu
+bindsym $mod+Escape reload
 
 ### Session ##################################################################
-bindsym $mod+$alt+q exit                  # super+alt+q  -> quit sway (was bspc quit)
-bindsym $mod+$alt+r reload                # super+alt+r  -> reload config (sway re-reads in place; no full restart needed)
-bindsym $mod+w        kill                # super+w       -> close window
-bindsym $mod+Shift+w  kill                # super+shift+w -> close (sway has no separate "kill")
+bindsym $mod+$alt+q exit
+bindsym $mod+$alt+r reload
+bindsym $mod+w        kill
+bindsym $mod+Shift+w  kill
 
 ### Window state #############################################################
-bindsym $mod+f       fullscreen toggle              # super+f       -> fullscreen
-bindsym $mod+s       floating toggle                # super+s       -> floating
-bindsym $mod+t       floating disable               # super+t       -> back to tiled
-bindsym $mod+m       layout toggle split tabbed     # super+m       -> tabbed view (closest to monocle: one window at a time, cycle with focus)
-bindsym $mod+Ctrl+y  sticky toggle                  # super+ctrl+y  -> sticky (was the bspwm "sticky" node flag; floating windows only)
+bindsym $mod+f       fullscreen toggle
+bindsym $mod+s       floating toggle
+bindsym $mod+t       floating disable
+bindsym $mod+m       layout toggle split tabbed
+bindsym $mod+Ctrl+y  sticky toggle
 
 bindsym $mod+$left  focus left
 bindsym $mod+$down  focus down
@@ -71,12 +71,13 @@ bindsym $mod+Shift+$down  move down
 bindsym $mod+Shift+$up    move up
 bindsym $mod+Shift+$right move right
 
-bindsym $mod+p        focus parent          # super+p       -> select parent container
-bindsym $mod+Shift+p  focus child           # super+shift+p -> descend into child
+bindsym $mod+p        focus parent
+bindsym $mod+Shift+p  focus child
 
-bindsym $mod+Ctrl+v  split vertical         # next window opens below
-bindsym $mod+Ctrl+h  split horizontal       # next window opens to the right
-
+bindsym $mod+Ctrl+$up  split vertical
+bindsym $mod+Ctrl+$down  split vertical
+bindsym $mod+Ctrl+$left  split horizontal
+bindsym $mod+Ctrl+$right  split horizontal
 
 bindsym $mod+$alt+$left  resize shrink width  5 px or 5 ppt
 bindsym $mod+$alt+$right resize grow   width  5 px or 5 ppt
