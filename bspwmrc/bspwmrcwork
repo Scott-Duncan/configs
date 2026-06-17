@@ -29,12 +29,14 @@ if [ $SCREEN_NUMBER -eq 3 ]; then
   bspc monitor $left_screen -d 1 2 3 4 5
   bspc monitor $right_screen -d 6 7 8 9
   bspc monitor $laptop_mon -d 10 11
+  picom --backend glx -b &
+  ~/.config/polybar/single_launch.sh &
 fi
 
 if [ $SCREEN_NUMBER -eq 1 ]; then
   xrandr --output $laptop_mon --primary --mode 1920x1200 --rotate normal
   bspc monitor $laptop_mon -d 1 2 3 4 5 6 7 8 9 10
-  picom -b &
+  picom --backend glx -b &
   ~/.config/polybar/single_launch.sh &
 fi
 
@@ -42,7 +44,7 @@ if [ $SCREEN_NUMBER -eq 2 ]; then
   xrandr --output $left_screen --primary --mode 1920x1080 --rotate normal --output $laptop_mon --rotate normal --mode 1920x1200 --right-of $left_screen
   bspc monitor $left_screen -d 1 2 3 4 5
   bspc monitor $laptop_mon -d 6 7 8 9 10
-  picom -b &
+  picom --backend glx -b &
   ~/.config/polybar/launch.sh &
 fi
 
