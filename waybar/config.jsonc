@@ -9,20 +9,36 @@
   // Choose the order of the modules
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["sway/window"],
-  "modules-right": ["network","battery","clock"],
+  "modules-right": ["network","battery","pulseaudio","clock","tray"],
   // Modules configuration
   "sway/workspaces": {
       "disable-scroll": true,
       "all-outputs": false,
-      "persistent-workspaces": {
-          "*": 5 // Shows 5 persistent workspaces on every monitor
-      },
       "format": "{icon}",
       "format-icons": {
-          "1": "",
-          "2": "",
+          "1": "1 ",
+          "2": "2 ",
           "urgent": "",
       }
+  },
+  "pulseaudio": {
+	"format": "{volume}% {icon}",
+	"format-bluetooth": "{volume}% {icon}",
+	"format-muted": "",
+	"format-icons": {
+		"alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+		"alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+		"headphone": "",
+		"hands-free": "",
+		"headset": "",
+		"phone": "",
+		"phone-muted": "",
+		"portable": "",
+		"car": "",
+		"default": ["", ""]
+	},
+	"scroll-step": 5,
+	"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
   "battery": {
       "states": {
@@ -68,14 +84,11 @@
   "sway/workspaces": {
       "disable-scroll": true,
       "all-outputs": false,
-      "persistent-workspaces": {
-          "*": 5 // Shows 5 persistent workspaces on every monitor
-      },
       "format": "{icon}",
       "format-icons": {
-          "8": "",
-          "9": "✍️",
-          "10": "",
+          "8": "8 ",
+          "9": "9 ✍️",
+          "10": "10 ",
       }
   },
   "cpu": {

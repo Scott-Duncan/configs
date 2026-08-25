@@ -2,13 +2,19 @@
 set $mod Mod4
 set $alt Mod1
 set $term kitty
-set $menu dmenu_run          # launcher; replaces dmenu_run (X11-only)
+set $menu fuzzel --list-executables-in-path 
 
 # Directional keys, vim-style (matches your bspwm h/j/k/l = W/S/N/E)
 set $left  h
 set $down  j
 set $up    k
 set $right l
+
+# Input 
+input "type:keyboard" xkb_options caps:escape
+input "type:keyboard" xkb_layout "us"
+ 
+
 
 # Wallpaper is built in — no feh, no swaybg process needed:
 output * bg ~/Pictures/Backgrounds/moon_venus.jpg fill
@@ -154,8 +160,8 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 
 #Startup Applications
 exec chromium &
-exec slack &
-exec Obsidian &
+exec slack --disable-gpu &
+exec Obsidian --no-sandbox &
 
 # Load distro drop-ins (gsettings/portals etc.) — keep this last:
 include /etc/sway/config.d/*

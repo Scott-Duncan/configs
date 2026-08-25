@@ -1,0 +1,10 @@
+profile docked {
+    output eDP-1 enable position 1980,600
+    output DP-2 mode 1920x1080@60 position 0,0
+    exec killall waybar; waybar -c ~/.config/waybar/config.jsonc
+}
+
+profile undocked {
+    output eDP-1 enable 1920x1080@60 position 0,0
+    exec killall waybar; waybar -c ~/.config/waybar/config_single.jsonc
+}
